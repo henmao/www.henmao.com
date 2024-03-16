@@ -1,10 +1,10 @@
 name: www.henmao.com release
 on: [push]
 jobs:
-  scp-to-cloud-tencent:
+  Sync-git-files:
     runs-on: ubuntu-latest
     steps:
-      - name: deploy file to server
+      - name: Sync git files
         uses: appleboy/ssh-action@v1.0.3
         with: 
           host: ${{ secrets.HOST }}
