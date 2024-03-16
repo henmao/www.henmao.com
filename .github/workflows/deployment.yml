@@ -1,17 +1,18 @@
-name: auto-publish
+name: www.henmao.com release
 on: [push]
 jobs:
   scp-to-cloud-tencent:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
       - name: deploy file to server
+      - uses: actions/checkout@master
         uses: appleboy/scp-action@master
         with: 
-          HOST: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USERNAME }}
-          KEY: ${{ secrets.KEY }}
-          source: "./dist/*"
-          target: "/home/ubuntu/docker-henmao/www/nginx/www.henmao.com"
-          strip_components: 1
-          rm: true
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+            cd ~/docker/www/www.henmao.com
+            git fetch --all
+            git reset --hard origin/main
+            git pull
