@@ -1,11 +1,302 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>sg</title>
-</head>
-<body>
-  <h1>sg</h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .action-container {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+      .number-container {
+        display: flex;
+        gap: 20px;
+      }
+      .input {
+        width: 60px;
+      }
+      button.active {
+        background-color: #00ff00;
+        border: 1px solid #00ff00;
+      }
+    </style>
+    <script src="./js/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>完成营造成就</h1>
+      <div class="action-container">
+        <button @click="handleSort('data1')">农业最高</button>
+        <button @click="handleSort('data2')">矿业最高</button>
+        <button @click="handleSort('data3')">商业最高</button>
+        <button @click="handleSort('data4')">军事最高</button>
+        <button @click="handleSort('all')">总和最高</button>
+      </div>
+      <div style="margin: 20px">
+        <h1>总和： {{total}}</h1>
+        <div style="display: flex; gap: 30px">
+          <div v-for="(item, index) in otherTotal">
+            <div>{{['农业', '矿业', '商业', '军事'][index]}}: {{item}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="number-container">
+        <label v-for="item in types">
+          {{item.text}}个数
+          <input
+            :value="item.num"
+            @change="handleNumChange"
+            :data-name="item.type"
+            class="input input-number"
+            type="number"
+        /></label>
+      </div>
+      <hr />
+      <div v-for="item in types">
+        <h2>{{item.text}}信息</h2>
+        <table>
+          <tr>
+            <th>农业</th>
+            <th>矿业</th>
+            <th>商业</th>
+            <th>军事</th>
+          </tr>
+          <tbody>
+            <tr
+              v-for="(subitem, index) in datas.filter(v => v.type === item.type)"
+            >
+              <td>
+                <input
+                  :data-type="item.type"
+                  :data-index="index"
+                  data-name="data1"
+                  @change="handleDataChange"
+                  :value="subitem.data1"
+                  class="input"
+                  type="number"
+                />
+              </td>
+              <td>
+                <input
+                  :data-type="item.type"
+                  :data-index="index"
+                  data-name="data2"
+                  @change="handleDataChange"
+                  :value="subitem.data2"
+                  class="input"
+                  type="number"
+                />
+              </td>
+              <td>
+                <input
+                  :data-type="item.type"
+                  :data-index="index"
+                  data-name="data3"
+                  @change="handleDataChange"
+                  :value="subitem.data3"
+                  class="input"
+                  type="number"
+                />
+              </td>
+              <td>
+                <input
+                  :data-type="item.type"
+                  :data-index="index"
+                  data-name="data4"
+                  @change="handleDataChange"
+                  :value="subitem.data4"
+                  class="input"
+                  type="number"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <hr />
+      </div>
+    </div>
+
+    <script>
+      const { createApp, ref, reactive, onUnmounted, onMounted } = Vue;
+
+      createApp({
+        setup() {
+          const localTypes = JSON.parse(localStorage.getItem("SG_TYPE")) || [
+            {
+              type: "0",
+              num: 1,
+              text: "主殿",
+            },
+            {
+              type: "1",
+              num: 1,
+              text: "广场",
+            },
+            {
+              type: "2",
+              num: 1,
+              text: "城墙",
+            },
+            {
+              type: "3",
+              num: 1,
+              text: "坊市",
+            },
+          ];
+          const localData = JSON.parse(localStorage.getItem("SG_DATA")) || [
+            {
+              type: "0",
+              data1: 0,
+              data2: 0,
+              data3: 0,
+              data4: 0,
+            },
+            {
+              type: "1",
+              data1: 0,
+              data2: 0,
+              data3: 0,
+              data4: 0,
+            },
+            {
+              type: "2",
+              data1: 0,
+              data2: 0,
+              data3: 0,
+              data4: 0,
+            },
+            {
+              type: "3",
+              data1: 0,
+              data2: 0,
+              data3: 0,
+              data4: 0,
+            },
+          ];
+          const types = ref(localTypes);
+          const datas = ref(localData);
+          const total = ref(0);
+          const otherTotal = ref([]);
+          function handleNumChange(e) {
+            const type = e.target.dataset.name;
+            const val = e.target.value;
+            types.value[type].num = val;
+            const current = datas.value.filter((val) => val.type === type);
+            const repeat = val - current?.length;
+            if (repeat > 0) {
+              // 补充
+              const data = [...Array(repeat)].map((item) => ({
+                type,
+                data1: 0,
+                data2: 0,
+                data3: 0,
+                data4: 0,
+              }));
+              datas.value.push(...data);
+            }
+            if (repeat < 0) {
+              const newData = datas.value.filter((val) => val.type === type);
+              newData.length = val;
+              datas.value = [
+                ...datas.value.filter((val) => val.type !== type),
+                ...newData,
+              ];
+            }
+            // console.log("data", datas, current, current?.length);
+          }
+
+          function handleDataChange(e) {
+            const type = e.target.dataset.type;
+            const name = e.target.dataset.name;
+            const index = e.target.dataset.index;
+            const val = e.target.value;
+            // types.value[type].num = val;
+            datas.value.filter((item) => item.type === type)[index][name] = val;
+          }
+
+          function handleSort(type) {
+            if (type === "all") {
+              datas.value.sort((a, b) => {
+                const asum =
+                  parseInt(a.data1, 10) +
+                  parseInt(a.data2, 10) +
+                  parseInt(a.data3, 10) +
+                  parseInt(a.data4, 10);
+                const bsum =
+                  parseInt(b.data1, 10) +
+                  parseInt(b.data2, 10) +
+                  parseInt(b.data3, 10) +
+                  parseInt(b.data4, 10);
+                return asum - bsum > 0 ? -1 : 1;
+              });
+            } else {
+              datas.value.sort((a, b) => (a[type] - b[type] > 0 ? -1 : 1));
+            }
+            // console.log("datas", [...datas.value]);
+            const tempData = JSON.parse(JSON.stringify(datas.value));
+            // console.log('tempData', tempData)
+            const lastData = [
+              ...tempData.filter((item) => item.type === "0").slice(0, 1),
+              ...tempData.filter((item) => item.type === "1").slice(0, 1),
+              ...tempData.filter((item) => item.type === "2").slice(0, 1),
+              ...tempData.filter((item) => item.type === "3").slice(0, 4),
+            ];
+
+            // console.log("lastData", lastData);
+            total.value = lastData.reduce((acc, curr) => {
+              console.log("curr", curr, name);
+              if (type === "all") {
+                acc +=
+                  parseInt(curr["data1"], 10) +
+                  parseInt(curr["data2"], 10) +
+                  parseInt(curr["data3"], 10) +
+                  parseInt(curr["data4"], 10);
+              } else {
+                acc += parseInt(curr[type], 10);
+              }
+              return acc;
+            }, 0);
+
+            otherTotal.value = lastData.reduce(
+              (acc, curr) => {
+                acc[0] += parseInt(curr["data1"], 10);
+                acc[1] += parseInt(curr["data2"], 10);
+                acc[2] += parseInt(curr["data3"], 10);
+                acc[3] += parseInt(curr["data4"], 10);
+                return acc;
+              },
+              [0, 0, 0, 0]
+            );
+            // console.log("otherTotal", otherTotal.value);
+
+            // 计算总和，和各个值
+            // type 0取1个 1取1个 2取1个 3取4个
+            //
+          }
+
+          function handleBeforeUnload(event) {
+            localStorage.setItem("SG_TYPE", JSON.stringify(types.value));
+            localStorage.setItem("SG_DATA", JSON.stringify(datas.value));
+          }
+          onMounted(() => {
+            window.addEventListener("beforeunload", handleBeforeUnload);
+          });
+          onUnmounted(() => {
+            window.removeEventListener("beforeunload", handleBeforeUnload);
+          });
+          return {
+            types,
+            datas,
+            total,
+            handleSort,
+            handleNumChange,
+            handleDataChange,
+            otherTotal,
+          };
+        },
+      }).mount("#app");
+    </script>
+  </body>
 </html>
