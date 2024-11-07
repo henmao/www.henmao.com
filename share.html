@@ -4,23 +4,65 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
   </head>
   <body>
-    <div id="share-button">click me</div>
+    <button id="share-button" style="margin-bottom: 20px">click me</button>
+    <div id="img" style="width: 100px; height: 100px; background: blue">
+      <div>我要变成一张图片</div>
+      <div>我是图片的下面</div>
+    </div>
     <script>
       function shareContent() {
-        if (navigator.share) {
-          navigator
-            .share({
-              title: "分享标题",
-              text: "这是分享的内容文本",
-              url: window.location.href, // 共享当前页面的 URL
-            })
-            .then(() => console.log("分享成功"))
-            .catch((error) => console.log("分享失败", error));
-        } else {
-          alert("此浏览器不支持分享功能");
-        }
+        htmlToImage
+          .toPng(document.querySelector("#img"))
+          .then(function (dataUrl) {
+            fetch(dataUrl)
+              .then((res) => res.blob())
+              .then((blob) => {
+                const file = new File([blob], "screenshot.png", {
+                  type: "image/png",
+                }); // 将 Blob 转换为 File
+
+                if (navigator.share) {
+                  navigator
+                    .share({
+                      files: [file],
+                      title: "Screenshot",
+                      text: "Check out this screenshot!",
+                    })
+                    .then(() => console.log("Share successful"))
+                    .catch((error) => console.error("Error sharing", error));
+                } else {
+                  console.log("Web Share API not supported");
+                }
+              });
+
+            // if (navigator.share) {
+            //   navigator
+            //     .share({
+            //       title: "分享标题",
+            //       text: "这是分享的内容文本",
+            //       files: [dataUrl],
+            //       // url: window.location.href, // 共享当前页面的 URL
+            //     })
+            //     .then(() => console.log("分享成功"))
+            //     .catch((error) => console.log("分享失败", error));
+            // } else {
+            //   alert("此浏览器不支持分享功能");
+            // }
+            // const link = document.createElement("a");
+            // link.href = dataUrl;
+            // link.download = "screenshot.png";
+            // link.click();
+            // var img = new Image();
+            // img.src = dataUrl;
+            // document.body.appendChild(img);
+          })
+          .catch(function (error) {
+            console.error("oops, something went wrong!", error);
+          });
+        return;
       }
 
       // 示例：绑定一个按钮触发分享
