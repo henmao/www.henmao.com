@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="share-button">click me</div>
+    <script>
+      function shareContent() {
+        if (navigator.share) {
+          navigator
+            .share({
+              title: "分享标题",
+              text: "这是分享的内容文本",
+              url: window.location.href, // 共享当前页面的 URL
+            })
+            .then(() => console.log("分享成功"))
+            .catch((error) => console.log("分享失败", error));
+        } else {
+          alert("此浏览器不支持分享功能");
+        }
+      }
+
+      // 示例：绑定一个按钮触发分享
+      document
+        .getElementById("share-button")
+        .addEventListener("click", shareContent);
+    </script>
+  </body>
+</html>
