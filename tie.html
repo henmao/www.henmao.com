@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body,
+      div {
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        width: 100vw;
+        height: 100vh;
+        background-color: blue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .big-img-container {
+        position: relative;
+        width: 800px;
+        height: 300px;
+        background-color: aqua;
+      }
+      .imgs-container {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+      }
+      .img {
+        width: 200px;
+        height: 100px;
+      }
+      .img1 {
+        background-color: blue;
+      }
+      .img2 {
+        background-color: darkcyan;
+      }
+      .img3 {
+        background-color: darkmagenta;
+      }
+      .hidden {
+        display: none;
+      }
+      .rotate-anim {
+        animation: spin 2s linear infinite;
+      }
+
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="big-img-container">
+        <img src="大图片" alt="" width="800" height="300" />
+        <div class="imgs-container">
+          <div class="img img1">
+            <img src="小图片" alt="" width="200" height="100" />
+          </div>
+          <div class="img img2">
+            <img src="小图片" alt="" width="200" height="100" />
+          </div>
+          <div class="img img3">
+            <img src="小图片" alt="" width="200" height="100" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const imgsContainer = document.querySelector(".imgs-container");
+      const imgs = document.querySelectorAll(".img");
+      const bigImg = document.querySelector(".big-img-container");
+      imgs.forEach((img) => {
+        img.onclick = () => {
+          imgsContainer.classList.add("hidden");
+          bigImg.classList.add("rotate-anim");
+        };
+      });
+    </script>
+  </body>
+</html>
