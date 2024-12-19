@@ -16,6 +16,7 @@ jobs:
         run: |
           npm install
           npm run build
+          mv build www.henmao.com
       - name: Copy files via ssh key
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -23,5 +24,5 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           rm: true
-          source: build/*
-          target: ~/docker/www/www.henmao.com
+          source: www.henmao.com
+          target: ~/docker/www
