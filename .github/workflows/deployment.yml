@@ -23,5 +23,5 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           rm: true
-          source: "build/index.html,build/*"
+          source: "build/index.html,build/sitemap.xml"
           target: ~/docker/www/www.henmao.com
