@@ -1,0 +1,27 @@
+name: scp files
+on: 
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Install dependencies and build
+        run: |
+          npm install
+          npm run build
+      - name: Copy files via ssh key
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          rm: true
+          source: build/*
+          target: ~/docker/www/www.henmao.com/
