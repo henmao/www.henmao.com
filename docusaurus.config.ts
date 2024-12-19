@@ -7,7 +7,7 @@ import type * as Preset from "@docusaurus/preset-classic";
 const config: Config = {
   title: "www.henmao.com",
   tagline: "我想想",
-  favicon: "img/favicon.ico",
+  favicon: "favicon.ico",
 
   // Set the production url of your site here
   url: "https://your-docusaurus-site.example.com",
