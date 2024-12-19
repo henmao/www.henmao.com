@@ -24,4 +24,4 @@ jobs:
           key: ${{ secrets.KEY }}
           rm: true
           source: build/*
-          target: ~/docker/www/www.henmao.com/
+          target: ~/docker/www/www.henmao.com
