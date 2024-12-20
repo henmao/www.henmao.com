@@ -71,7 +71,7 @@ const config: Config = {
       title: "henmao",
       logo: {
         alt: "Logo",
-        src: "img/logo.svg",
+        src: "img/logo.jpg",
       },
       items: [
         {
