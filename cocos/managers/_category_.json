@@ -1,0 +1,8 @@
+{
+  "label": "管理器",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "常用的管理器"
+  }
+}

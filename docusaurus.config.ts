@@ -37,6 +37,8 @@ const config: Config = {
       {
         docs: {
           sidebarPath: "./sidebars.ts",
+          path: 'cocos',
+          routeBasePath: 'cocos',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
@@ -81,7 +83,8 @@ const config: Config = {
           type: "docSidebar",
           sidebarId: "tutorialSidebar",
           position: "left",
-          label: "Docs",
+          to: '/cocos',
+          label: "Cocos",
         },
         { to: "/blog", label: "Blog", position: "left" },
         {
@@ -95,11 +98,11 @@ const config: Config = {
       style: "dark",
       links: [
         {
-          title: "Docs",
+          title: "Cocos",
           items: [
             {
               label: "Tutorial",
-              to: "/docs/intro",
+              to: "/cocos/intro",
             },
           ],
         },
