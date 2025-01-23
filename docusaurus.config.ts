@@ -5,8 +5,8 @@ import type * as Preset from "@docusaurus/preset-classic";
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: "www.henmao.com",
-  tagline: "我想想",
+  title: "100 个小游戏开发",
+  tagline: "进度 1/100",
   favicon: "favicon.ico",
 
   // Set the production url of your site here
@@ -46,6 +46,7 @@ const config: Config = {
         },
         blog: {
           showReadingTime: true,
+          blogSidebarCount: 'ALL',
           feedOptions: {
             type: ["rss", "atom"],
             xslt: true,

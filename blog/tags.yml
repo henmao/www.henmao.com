@@ -2,3 +2,23 @@ rbac:
   label: rbac
   permalink: /rbac
   description: rbac
+npm:
+  label: npm
+  permalink: /npm
+  description: npm
+ps:
+  label: ps
+  permalink: /ps
+  description: ps
+tips:
+  label: tips
+  permalink: /tips
+  description: tips
+tools:
+  label: tools
+  permalink: /tools
+  description: tools
+certbot:
+  label: certbot
+  permalink: /certbot
+  description: certbot
