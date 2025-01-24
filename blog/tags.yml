@@ -46,3 +46,7 @@ software:
   label: software
   permalink: /software
   description: software
+linux:
+  label: linux
+  permalink: /linux
+  description: linux
