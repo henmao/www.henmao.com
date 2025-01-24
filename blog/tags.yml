@@ -38,3 +38,11 @@ docker:
   label: docker
   permalink: /docker
   description: docker
+nginx:
+  label: nginx
+  permalink: /nginx
+  description: nginx
+software:
+  label: software
+  permalink: /software
+  description: software
