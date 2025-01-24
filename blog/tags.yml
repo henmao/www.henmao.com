@@ -34,3 +34,7 @@ ubuntu:
   label: ubuntu
   permalink: /ubuntu
   description: ubuntu
+docker:
+  label: docker
+  permalink: /docker
+  description: docker
