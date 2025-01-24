@@ -22,3 +22,15 @@ certbot:
   label: certbot
   permalink: /certbot
   description: certbot
+rules:
+  label: rules
+  permalink: /rules
+  description: rules
+figma:
+  label: figma
+  permalink: /figma
+  description: figma
+ubuntu:
+  label: ubuntu
+  permalink: /ubuntu
+  description: ubuntu

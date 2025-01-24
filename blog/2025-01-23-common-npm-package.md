@@ -1,6 +1,6 @@
 ---
 slug: common npm
-title: 常用 npm 包
+title: npm 包推荐
 authors: [shanks]
 tags: [npm]
 ---
