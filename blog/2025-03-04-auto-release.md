@@ -1,5 +1,4 @@
 ---
----
 slug: auto-release
 title: auth release
 authors: [shanks]
