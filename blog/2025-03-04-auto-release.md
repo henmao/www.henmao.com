@@ -80,3 +80,82 @@ select option in "$OPTION1" "$OPTION2";do
   esac
 done
 ```
+
+## deploy-remote-staging.sh
+
+```bash
+#!/bin/bash
+
+# 设置项目路径
+REMOTE_PATH="/var/www/html/aa"
+
+# 进入项目目录
+cd $REMOTE_PATH || { echo "Failed to change directory to $REMOTE_PATH"; exit 1; }
+
+# 清缓存
+rm -rf .next/cache
+
+# git checkout main
+
+# 拉取最新代码
+git fetch --all || { echo "git fetch --all failed"; exit 1; }
+git reset --hard origin/main || { echo "git reset --hard origin/main failed"; exit 1; }
+git pull || { echo "git pull failed"; exit 1; }
+
+# nvm 是一个脚本不是一个指令
+source ~/.nvm/nvm.sh || { echo "source nvm.sh failed"; exit 1; }
+
+# 切换到 node 20 版本
+nvm use 20 || { echo "nvm use failed"; exit 1; }
+
+# 安装依赖
+npm install || { echo "npm install failed"; exit 1; }
+
+# 构建项目
+npm run build:staging || { echo "npm run build:staging failed"; exit 1; }
+
+# 启动或重启 PM2 服务
+pm2 startOrRestart ecosystem.config.js --only aa-staging || { echo "PM2 command failed"; exit 1; }
+
+echo "Staging deployment finished successfully"
+
+echo "http://aa.com/"
+```
+## deploy-remote-prod.sh
+
+```bash
+#!/bin/bash
+
+# 设置项目路径
+REMOTE_PATH="/home/www/bb"
+
+# 进入项目目录
+cd $REMOTE_PATH || { echo "Failed to change directory to $REMOTE_PATH"; exit 1; }
+
+# 清缓存
+rm -rf .next/cache
+
+# 拉取最新代码
+git fetch --all || { echo "git fetch --all failed"; exit 1; }
+git reset --hard origin/main || { echo "git reset --hard origin/main failed"; exit 1; }
+git pull || { echo "git pull failed"; exit 1; }
+
+# nvm 是一个脚本不是一个指令
+source ~/.nvm/nvm.sh || { echo "source nvm.sh failed"; exit 1; }
+
+# 切换到 node 20 版本
+nvm use 20 || { echo "nvm use failed"; exit 1; }
+
+# 安装依赖
+npm install || { echo "npm install failed"; exit 1; }
+
+# 构建项目
+npm run build:prod || { echo "npm run build:prod failed"; exit 1; }
+
+# 启动或重启 PM2 服务
+pm2 startOrRestart ecosystem.config.js --only bb-prod  || { echo "PM2 command failed"; exit 1; }
+
+echo "Prod deployment finished successfully"
+
+echo "http://bb.com/"
+```
