@@ -19,7 +19,8 @@
     <script src="https://unpkg.com/html5-qrcode"></script>
     <script>
       const html5QrCode = new Html5Qrcode("reader");
-      const config = { fps: 10, qrbox: 250 };
+      const config = { fps: 10, qrbox: 250, aspectRatio: 1, formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE], verbose: true}
+
       html5QrCode.start({ facingMode: "environment" }, config, onScanSuccess);
 
       function onScanSuccess(decodedText, decodedResult) {
