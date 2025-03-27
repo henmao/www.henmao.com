@@ -6,8 +6,8 @@
     <title>Document</title>
     <style>
       html, body {
-        width: 100vw;
-        height: 100vh;
+        padding: 0;
+        margin: 0;
       }
         #reader {
           width: 100%;
@@ -17,11 +17,18 @@
   <body>
     <div id="reader"></div>
     <script src="https://unpkg.com/html5-qrcode"></script>
+    <script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
+    <script>
+      // VConsole will be exported to `window.VConsole` by default.
+      var vConsole = new window.VConsole();
+    </script>
     <script>
       const html5QrCode = new Html5Qrcode("reader");
       const config = { fps: 10, qrbox: 250, aspectRatio: 1, formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE], verbose: true}
 
-      html5QrCode.start({ facingMode: "environment" }, config, onScanSuccess);
+      html5QrCode.start({ facingMode: "environment" }, config, onScanSuccess).catch((err)=>{
+        console.log('start err', err)
+      });
 
       function onScanSuccess(decodedText, decodedResult) {
         // Handle on success condition with the decoded text or result.
