@@ -1,9 +1,8 @@
 ---
----
 slug: design-pattern
 title: Design Pattern
 authors: [shanks]
-tags: [design_pattern]
+tags: [design-pattern]
 ---
 
 常用设计模式
