@@ -3,7 +3,7 @@
 slug: design-pattern
 title: Design Pattern
 authors: [shanks]
-tags: [design-pattern]
+tags: [design_pattern]
 ---
 
 常用设计模式
