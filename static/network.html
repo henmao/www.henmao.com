@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const url = "https://game-calabash-api.henmao.com/user/heartbeat";
+      const xhr = new XMLHttpRequest();
+      xhr.open('get', url);
+      xhr.onloadend = () => {
+        console.log("onloadend", xhr.status, xhr.responseText);
+      };
+      xhr.onerror = () => {
+        console.log("onerror", xhr.status, xhr.responseText);
+      };
+
+      xhr.onreadystatechange = () => {
+        console.log(
+          "onreadystatechange",
+          xhr.readyState,
+          xhr.status,
+          xhr.responseText
+        );
+      };
+      xhr.send();
+    </script>
+  </body>
+</html>
