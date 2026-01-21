@@ -9,12 +9,18 @@
     <script>
       const url = "https://game-calabash-api.henmao.com/user/heartbeat";
       const xhr = new XMLHttpRequest();
-      xhr.open('get', url);
+      xhr.open("get", url);
       xhr.onloadend = () => {
         console.log("onloadend", xhr.status, xhr.responseText);
+        document.writeln(
+          "onloadend" + xhr.status + ":" + xhr.responseText + "<br/>"
+        );
       };
       xhr.onerror = () => {
         console.log("onerror", xhr.status, xhr.responseText);
+        document.writeln(
+          "onerror" + xhr.status + ":" + xhr.responseText + "<br/>"
+        );
       };
 
       xhr.onreadystatechange = () => {
@@ -24,8 +30,20 @@
           xhr.status,
           xhr.responseText
         );
+        document.writeln(
+          "onreadystatechange" +
+            xhr.readyState +
+            xhr.status +
+            ":" +
+            xhr.responseText +
+            "<br/>"
+        );
       };
       xhr.send();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/vconsole@latest/dist/vconsole.min.js"></script>
+    <script>
+      const vConsole = new VConsole();
     </script>
   </body>
 </html>
