@@ -1,5 +1,5 @@
 ---
-title: Docker 常用命令
+title: Docker
 sidebar_position: 2
 ---
 
@@ -56,4 +56,26 @@ sudo docker compose logs console-app
 
 ```shell
 ./stop.sh console-app-staging
+```
+
+## 配置镜像源
+
+编辑 `/etc/docker/daemon.json`，配置腾讯云内部源：
+
+```json
+{
+  "registry-mirrors": ["https://mirror.ccs.tencentyun.com"]
+}
+```
+
+重启生效：
+
+```shell
+sudo systemctl restart docker
+```
+
+验证：
+
+```shell
+sudo docker info
 ```

@@ -1,5 +1,5 @@
 ---
-title: Figma 常用操作
+title: Figma
 sidebar_position: 2
 ---
 

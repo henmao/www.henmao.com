@@ -1,5 +1,5 @@
 ---
-title: Linux 常用命令
+title: Linux
 sidebar_position: 3
 ---
 
@@ -35,3 +35,30 @@ history -E -10
 | !xx | 查找最近一条包括 xx 关键字的命令 |
 | cd - | 回到上一次所在目录 |
 | Ctrl + l | 清屏 |
+
+## SSH
+
+保持与服务端长连接，编辑 `~/.ssh/config`：
+
+```shell
+Host *
+  ServerAliveInterval 60
+  ServerAliveCountMax 3
+```
+
+- `ServerAliveInterval`：每隔 60 秒发送一次心跳包
+- `ServerAliveCountMax`：无响应时最多重试 3 次后断开
+
+## 网络
+
+查询 IP 地址归属地：
+
+```shell
+curl http://www.geoplugin.net/json.gp?ip=xx.xx.xx.xx
+```
+
+生成随机字符串：
+
+```shell
+openssl rand -base64 32
+```

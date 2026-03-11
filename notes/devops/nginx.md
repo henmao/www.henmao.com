@@ -1,5 +1,5 @@
 ---
-title: Nginx 配置
+title: Nginx
 sidebar_position: 4
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Ubuntu 配置
+title: Ubuntu
 sidebar_position: 5
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: NPM 包推荐
+title: NPM
 sidebar_position: 2
 ---
 

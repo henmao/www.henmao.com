@@ -1,5 +1,5 @@
 ---
-title: 常用软件
+title: 软件
 sidebar_position: 1
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: 常见规范
+title: 规范
 sidebar_position: 3
 ---
 

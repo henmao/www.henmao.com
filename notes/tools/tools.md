@@ -1,5 +1,5 @@
 ---
-title: 工具推荐
+title: 工具
 sidebar_position: 4
 ---
 
