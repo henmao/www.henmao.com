@@ -50,3 +50,7 @@ linux:
   label: linux
   permalink: /linux
   description: linux
+devops:
+  label: devops
+  permalink: /devops
+  description: devops

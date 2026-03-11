@@ -15,13 +15,9 @@ const FeatureList: FeatureItem[] = [
     description: <>还原童年校门口抽签赢糖葫芦的乐趣，重温那份期待与惊喜的小幸福！</>,
   },
   {
-    title: "wechat 02",
+    title: "倒水修行",
     Svg: require("@site/static/img/undraw_docusaurus_tree.svg").default,
-    description: (
-      <>
-        test <code>02</code>
-      </>
-    ),
+    description: <>将不同颜色的水倒入试管，让每支试管只装同一种颜色，考验逻辑与耐心的益智解谜小游戏！</>,
   },
   {
     title: "wechat 03",

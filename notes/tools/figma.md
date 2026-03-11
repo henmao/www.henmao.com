@@ -1,0 +1,25 @@
+---
+title: Figma 常用操作
+sidebar_position: 2
+---
+
+在线使用：https://material-foundation.github.io/material-theme-builder/
+颜色规则：https://m3.material.io/styles/color/roles
+
+## 快捷键
+
+| 键 | 功能 |
+| -- | -- |
+| Shift + 1 | 查看整体 |
+| Shift + 2 | 查看当前选中 |
+| Command + Option + K | 创建组件 |
+| Option + 1 | 查看 File |
+| Option + 2 | 查看组件 |
+
+
+## 快速布局
+
+1. F 创建 Frame
+2. 将 Frame 变成 Group
+3. 给 Group 添加 Auto Layout
+4. 设置 Auto Layout 为 Hug Content

@@ -5,8 +5,9 @@ import type * as Preset from "@docusaurus/preset-classic";
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
+  clientModules: ["./src/clientModules/gtag-fallback.js"],
   title: "100 个小游戏开发",
-  tagline: "进度 1/100",
+  tagline: "进度 2/100",
   favicon: "favicon.ico",
 
   // Set the production url of your site here
@@ -36,30 +37,11 @@ const config: Config = {
       "classic",
       {
         docs: {
-          sidebarPath: "./sidebars.ts",
-          path: 'cocos',
-          routeBasePath: 'cocos',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            "https://github.com/henmao/www.henmao.com/tree/main/",
+          path: "notes",
+          routeBasePath: "notes",
+          sidebarPath: "./sidebars-notes.ts",
         },
-        blog: {
-          showReadingTime: true,
-          blogSidebarCount: 'ALL',
-          feedOptions: {
-            type: ["rss", "atom"],
-            xslt: true,
-          },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            "https://github.com/henmao/www.henmao.com/tree/main",
-          // Useful options to enforce blogging best practices
-          onInlineTags: "warn",
-          onInlineAuthors: "warn",
-          onUntruncatedBlogPosts: "warn",
-        },
+        blog: false,
         theme: {
           customCss: "./src/css/custom.css",
         },
@@ -82,12 +64,10 @@ const config: Config = {
       items: [
         {
           type: "docSidebar",
-          sidebarId: "tutorialSidebar",
+          sidebarId: "notesSidebar",
           position: "left",
-          to: '/cocos',
-          label: "Cocos",
+          label: "Notes",
         },
-        { to: "/blog", label: "Blog", position: "left" },
         {
           href: "https://github.com/henmao/www.henmao.com",
           label: "GitHub",
@@ -98,15 +78,6 @@ const config: Config = {
     footer: {
       style: "dark",
       links: [
-        {
-          title: "Cocos",
-          items: [
-            {
-              label: "Tutorial",
-              to: "/cocos/intro",
-            },
-          ],
-        },
         {
           title: "Community",
           items: [
@@ -120,8 +91,8 @@ const config: Config = {
           title: "More",
           items: [
             {
-              label: "Blog",
-              to: "/blog",
+              label: "Notes",
+              to: "/notes/devops/certbot",
             },
             {
               label: "GitHub",
